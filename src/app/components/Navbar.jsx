@@ -63,7 +63,7 @@ function Navbar() {
 
             {
                 showAbout &&
-                <About setShowAbout={setShowAbout} />
+                <About showAbout={showAbout} setShowAbout={setShowAbout} />
             }
         </>
     );

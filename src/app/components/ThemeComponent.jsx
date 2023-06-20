@@ -34,7 +34,6 @@ const CenterBackground = styled.div`
 background: ${({ theme }) => theme.desktopBackground};
 display: flex;
 justify-content:center;
-height: 100vh;
 `;
 
 const Container = styled.div`
