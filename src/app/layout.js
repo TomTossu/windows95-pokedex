@@ -1,4 +1,3 @@
-import "./globals.css";
 import ThemeComponent from "./components/ThemeComponent";
 
 export const metadata = {

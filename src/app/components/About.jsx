@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Window, WindowContent, WindowHeader } from 'react95';
+import { Anchor, Button, Window, WindowContent, WindowHeader } from 'react95';
 
 function About({ showAbout, setShowAbout }) {
     return (
@@ -21,11 +21,16 @@ function About({ showAbout, setShowAbout }) {
                 </Button>
             </WindowHeader>
             <WindowContent>
-                <p>
-                    When you set &quot;resizable&quot; prop, there will be drag handle
-                    in the bottom right corner (but resizing itself must be handled by
-                    you tho!)
+                <h1 style={{ fontSize: '2rem' }}>Pokedex95</h1>
+                <p style={{ marginTop: '1rem' }}>An open source Windows 95 style Pokedex</p>
+                <p style={{ marginTop: '1rem' }}>
+                    Built with <Anchor href='https://react.dev/'>React</Anchor>
+                    {' / '}
+                    <Anchor href='https://nextjs.org/'>Next.js</Anchor>
+                    {' and '}
+                    <Anchor href='https://react95.io/'>React95</Anchor>
                 </p>
+                <p style={{ marginTop: '1rem' }}>Icons downloaded from <Anchor href='https://win98icons.alexmeub.com/'>here</Anchor></p>
             </WindowContent>
         </Window>
     );
