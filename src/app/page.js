@@ -10,7 +10,9 @@ export default async function Home() {
         gridTemplateColumns: "repeat(6, 100px)",
         gap: "3rem 8rem",
       }}>
-      <PokemonContainer pokemonList={pokemonList} />
+      {pokemonList.results.map((pokemon, index) => (
+        <PokemonContainer key={pokemon.name + index} pokemon={pokemon} />
+      ))}
     </div>
   );
 }

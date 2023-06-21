@@ -1,17 +1,12 @@
-'use client'
-import { useState } from 'react'
 import Pokemon from './Pokemon'
+import { fetchSinglePokemon } from './api'
 
-async function PokemonContainer({ pokemonList }) {
-    const [selected, setSelected] = useState(null)
+async function PokemonContainer({ pokemon }) {
+    const pokemonData = await fetchSinglePokemon(pokemon)
 
-    console.log(pokemonList)
     return (
-        pokemonList.results.map((pokemon) => (
-            <Pokemon selected={selected} setSelected={setSelected} pokemon={pokemon} />
-        ))
+        <Pokemon pokemonData={pokemonData} />
     )
 }
 
 export default PokemonContainer
-

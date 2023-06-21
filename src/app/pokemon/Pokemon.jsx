@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
-import { fetchSinglePokemon } from './api'
+import { useState } from 'react'
 
-async function Pokemon({ selected, setSelected, pokemon }) {
-    const pokemonData = await fetchSinglePokemon(pokemon)
+function Pokemon({ pokemonData }) {
+    const [selected, setSelected] = useState(0)
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
