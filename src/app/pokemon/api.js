@@ -19,13 +19,23 @@ export const fetchAllPokemons = async () => {
 export const fetchSinglePokemon = async (pokemon) => {
   const url = pokemon.url;
   try {
-    const response = await fetch(url);
+    const [responseData, responseSpecies] = await Promise.all([
+      fetch(url),
+      fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`),
+    ]);
 
-    if (!response.ok) {
+    if (!responseData.ok || !responseSpecies.ok) {
       throw new Error("Invalid Request");
     }
 
-    const data = await response.json();
+    const data = await responseData.json();
+    const species = await responseSpecies.json();
+
+    const flavorTextEntry = species.flavor_text_entries.findIndex((i) => {
+      return i.language.name === "en" && i.version.name === "y";
+    });
+
+    data.flavor_text = species.flavor_text_entries[flavorTextEntry].flavor_text;
 
     return data;
   } catch (error) {

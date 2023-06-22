@@ -6,7 +6,7 @@ import helpBook from '../../assets/icons/help_book.svg'
 
 import Image from 'next/image';
 import Link from 'next/link';
-import About from './About';
+import AboutModal from './AboutModal';
 
 
 function Navbar() {
@@ -63,7 +63,7 @@ function Navbar() {
 
             {
                 showAbout &&
-                <About showAbout={showAbout} setShowAbout={setShowAbout} />
+                <AboutModal showAbout={showAbout} setShowAbout={setShowAbout} />
             }
         </>
     );

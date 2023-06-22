@@ -1,7 +1,7 @@
 import React from 'react'
 import { Anchor, Button, Window, WindowContent, WindowHeader } from 'react95';
 
-function About({ showAbout, setShowAbout }) {
+function AboutModal({ showAbout, setShowAbout }) {
     return (
         <Window className='window' style={{
             maxWidth: '100%',
@@ -36,4 +36,4 @@ function About({ showAbout, setShowAbout }) {
     );
 }
 
-export default About
+export default AboutModal
