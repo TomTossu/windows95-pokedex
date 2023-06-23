@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image';
 import React, { useState } from 'react'
-import { Button, Tab, TabBody, Tabs, Window, WindowContent, WindowHeader } from 'react95';
+import { Button, Hourglass, Tab, TabBody, Tabs, Window, WindowContent, WindowHeader } from 'react95';
 import { titleCase, roundOff } from '@/utils/utils';
 
 const typeColors = {
@@ -48,33 +48,50 @@ function PokemonModal({ showPokemon, setShowPokemon, pokemonData }) {
                 </Button>
             </WindowHeader>
             <WindowContent>
-                <Tabs value={activeTab} onChange={setActiveTab}>
-                    <Tab value={0}>Info</Tab>
-                    <Tab value={1}>Stats</Tab>
-                    <Tab value={2}>Abilities</Tab>
-                </Tabs>
-                <TabBody>
-                    {activeTab === 0 && (
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <Image src={pokemonData.sprites.front_default} height={150} width={150} alt={pokemonData.name} />
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                <h1 style={{ fontSize: '25px', fontWeight: 600 }}>{titleCase(pokemonData.name)} #{pokemonData.id}</h1>
-                                <div style={{ display: 'flex', gap: '10px' }}>
-                                    {pokemonData.types.map((object) => (
-                                        <span key={object.slot} style={{ background: typeColors[object.type.name], padding: 6, color: 'white' }}>{object.type.name}</span>
-                                    ))}
+                {!pokemonData && (
+                    <div
+                        style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: 250,
+                        }}>
+                        <Hourglass size={40} />
+                    </div>
+                )}
+                {pokemonData && (
+                    <>
+                        <Tabs value={activeTab} onChange={setActiveTab}>
+                            <Tab value={0}>Info</Tab>
+                            <Tab value={1}>Stats</Tab>
+                            <Tab value={2}>Abilities</Tab>
+                        </Tabs>
+                        <TabBody>
+                            {activeTab === 0 && (
+                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image src={pokemonData.sprites.front_default} height={150} width={150} alt={pokemonData.name} />
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                        <h1 style={{ fontSize: '25px', fontWeight: 600 }}>{titleCase(pokemonData.name)} #{pokemonData.id}</h1>
+                                        <div style={{ display: 'flex', gap: '10px' }}>
+                                            {pokemonData.types.map((object) => (
+                                                <span key={object.slot} style={{ background: typeColors[object.type.name], padding: 6, color: 'white' }}>{object.type.name}</span>
+                                            ))}
+                                        </div>
+                                        <p>
+                                            <span style={{ fontWeight: 'bold' }}>Height:</span>{' '}
+                                            {roundOff(pokemonData.height * 0.1)}m{' '}
+                                            <span style={{ fontWeight: 'bold' }}>Weight:</span>{' '}
+                                            {roundOff(pokemonData.weight * 0.1)}kg
+                                        </p>
+                                        <p>{pokemonData.flavor_text}</p>
+                                    </div>
                                 </div>
-                                <p>
-                                    <span style={{ fontWeight: 'bold' }}>Height:</span>{' '}
-                                    {roundOff(pokemonData.height * 0.1)}m{' '}
-                                    <span style={{ fontWeight: 'bold' }}>Weight:</span>{' '}
-                                    {roundOff(pokemonData.weight * 0.1)}kg
-                                </p>
-                                <p>{pokemonData.flavor_text}</p>
-                            </div>
-                        </div>
-                    )}
-                </TabBody>
+                            )}
+                        </TabBody>
+                    </>
+                )}
+
+
             </WindowContent>
         </Window >
     )

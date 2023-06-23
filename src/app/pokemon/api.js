@@ -1,5 +1,12 @@
-export const fetchAllPokemons = async () => {
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0";
+export const GENERATION_LIMITS = {
+  first_gen: { limit: 151, offset: 0 },
+  second_gen: { limit: 100, offset: 151 },
+  third_gen: { limit: 135, offset: 251 },
+  fourth_gen: { limit: 107, offset: 386 },
+};
+
+export const getAllPokemons = async (generation = "second_gen") => {
+  const url = `https://pokeapi.co/api/v2/pokemon?limit=${GENERATION_LIMITS[generation].limit}&offset=${GENERATION_LIMITS[generation].offset}`;
   try {
     const response = await fetch(url);
 
@@ -7,7 +14,15 @@ export const fetchAllPokemons = async () => {
       throw new Error("Invalid Request");
     }
 
-    const data = await response.json();
+    const json = await response.json();
+
+    const data = json.results.map((pokemon, index) => {
+      return {
+        id: GENERATION_LIMITS[generation].offset + index + 1,
+        name: pokemon.name,
+        selected: false,
+      };
+    });
 
     return data;
   } catch (error) {
@@ -16,12 +31,11 @@ export const fetchAllPokemons = async () => {
   }
 };
 
-export const fetchSinglePokemon = async (pokemon) => {
-  const url = pokemon.url;
+export const getSinglePokemon = async (pokemon) => {
   try {
     const [responseData, responseSpecies] = await Promise.all([
-      fetch(url),
-      fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.name}`),
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`),
+      fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`),
     ]);
 
     if (!responseData.ok || !responseSpecies.ok) {

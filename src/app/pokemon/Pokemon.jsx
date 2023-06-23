@@ -3,28 +3,37 @@ import Image from 'next/image'
 import { useState } from 'react'
 import PokemonModal from './PokemonModal'
 import { titleCase } from '@/utils/utils'
+import { getSinglePokemon } from './api'
 
-function Pokemon({ pokemonData }) {
-    const [selected, setSelected] = useState(0)
+function Pokemon({ pokemon, handleSelect }) {
+    const { id, name, selected } = pokemon
     const [showPokemon, setShowPokemon] = useState(false)
+    const [pokemonData, setPokemonData] = useState()
+
+    const openPokemonModal = (async () => {
+        setShowPokemon(true)
+        const data = await getSinglePokemon(pokemon)
+        setPokemonData(data)
+    })
 
     return (
         <>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-                onMouseOver={() => setSelected(pokemonData.id)}
-                onMouseOut={() => setSelected(0)}
-                onClick={() => setShowPokemon(pokemonData.id)}
+                onClick={() => handleSelect(id)}
+                onDoubleClick={() => {
+                    openPokemonModal()
+                }}
             >
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', width: '12rem' }}>
-                    <Image src={pokemonData.sprites.front_default} height={150} width={150} alt={pokemonData.name} />
-                    <span style={{ color: 'white', textDecoration: 'underline', background: selected === pokemonData.id ? '#0000aa' : 'transparent' }}>
-                        {titleCase(pokemonData.name)}
+                    <Image src={`/${id}.png`} height={150} width={150} alt={name} />
+                    <span style={{ color: 'white', textDecoration: 'underline', background: selected ? '#0000aa' : 'transparent' }}>
+                        {titleCase(name)}
                     </span>
                 </div>
             </div>
 
             {showPokemon &&
-                <PokemonModal pokemon={pokemonData} showPokemon={showPokemon} setShowPokemon={setShowPokemon} pokemonData={pokemonData} />
+                <PokemonModal showPokemon={showPokemon} setShowPokemon={setShowPokemon} pokemonData={pokemonData} />
             }
         </>
     )

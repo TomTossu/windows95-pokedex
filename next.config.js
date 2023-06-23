@@ -9,7 +9,6 @@ const nextConfig = {
     ],
   },
   reactStrictMode: true,
-  optimizeFileTracing: false,
 };
 
 module.exports = nextConfig;
