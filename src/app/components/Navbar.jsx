@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppBar, Button, MenuList, MenuListItem, TextInput, Toolbar } from 'react95';
 import windowsIcon from '../../assets/icons/windowsIcon.svg'
 import cdDrive from '../../assets/icons/cd_drive.svg'
@@ -13,15 +13,19 @@ function Navbar() {
     const [openMenu, setOpenMenu] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
 
+    useEffect(() => {
+        document.body.style.overflow = showAbout ? 'hidden' : 'auto';
+    }, [showAbout])
+
     return (
         <>
-            <AppBar>
+            <AppBar style={{ zIndex: 3 }}>
                 <Toolbar style={{ justifyContent: 'space-between' }}>
-                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <div style={{ display: 'flex', gap: 5 }}>
                         <Button
                             onClick={() => setOpenMenu(!openMenu)}
                             active={openMenu}
-                            style={{ fontWeight: 'bold', width: '100%', justifyContent: 'space-between', fontSize: 20 }}>
+                            style={{ fontWeight: 'bold', fontSize: 20 }}>
                             <Image
                                 src={windowsIcon}
                                 alt='windows logo'

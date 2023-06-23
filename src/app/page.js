@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Pokemon from "./pokemon/Pokemon";
 import { getAllPokemons } from "./pokemon/api";
 import { Hourglass } from "react95";
-import styled from "styled-components";
 
 export default function Home() {
   const [status, setStatus] = useState("pending");
   const [pokemonList, setPokemonList] = useState([]);
+  const [disableCursor, setDisableCursor] = useState(false);
 
   useEffect(() => {
     const fetchPokemonList = async () => {
@@ -56,6 +56,8 @@ export default function Home() {
           key={pokemon.id}
           pokemon={pokemon}
           handleSelect={handleSelect}
+          disableCursor={disableCursor}
+          setDisableCursor={setDisableCursor}
         />
       ))}
     </div>

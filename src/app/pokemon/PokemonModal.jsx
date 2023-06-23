@@ -27,6 +27,9 @@ const typeColors = {
 
 function PokemonModal({ showPokemon, setShowPokemon, pokemonData }) {
     const [activeTab, setActiveTab] = useState(0);
+    const handleClose = (() => {
+        setShowPokemon(false)
+    })
 
     return (
         <Window className='window' style={{
@@ -41,7 +44,7 @@ function PokemonModal({ showPokemon, setShowPokemon, pokemonData }) {
         }}>
             <WindowHeader className='window-title' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span>Pokemon.exe</span>
-                <Button onClick={() => setShowPokemon(false)}>
+                <Button onClick={() => handleClose()}>
                     <span className='close-icon' style={{ fontSize: '25px', fontWeight: 'bold', transform: 'translateY(-1px)' }}>
                         x
                     </span>

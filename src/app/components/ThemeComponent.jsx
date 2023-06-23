@@ -32,6 +32,7 @@ justify-content:center;
 
 const Container = styled.div`
 padding-top: 4rem;
+padding-bottom: 4rem;
 `;
 
 const ThemeComponent = ({ children }) => (

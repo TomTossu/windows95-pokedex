@@ -5,7 +5,7 @@ export const GENERATION_LIMITS = {
   fourth_gen: { limit: 107, offset: 386 },
 };
 
-export const getAllPokemons = async (generation = "second_gen") => {
+export const getAllPokemons = async (generation = "fourth_gen") => {
   const url = `https://pokeapi.co/api/v2/pokemon?limit=${GENERATION_LIMITS[generation].limit}&offset=${GENERATION_LIMITS[generation].offset}`;
   try {
     const response = await fetch(url);
