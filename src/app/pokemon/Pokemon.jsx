@@ -1,11 +1,10 @@
 'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import PokemonModal from './PokemonModal'
+import PokemonModal from './components/PokemonModal'
 import { titleCase } from '@/utils/utils'
 import { getSinglePokemon } from './api'
 import styled from 'styled-components'
-
 
 const PokemonDiv = styled.div`
 display: flex;

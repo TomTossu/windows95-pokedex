@@ -57,3 +57,20 @@ export const getSinglePokemon = async (pokemon) => {
     throw error;
   }
 };
+
+export const getMovesData = async (url) => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Invalid Request");
+    }
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error("API request failed", error);
+    throw error;
+  }
+};
