@@ -13,8 +13,8 @@ function Abilities({ pokemonData }) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {pokemonData.abilities.map((obj) => (
-                    <TableRow style={{ textAlign: 'center' }}>
+                {pokemonData.abilities.map((obj, index) => (
+                    <TableRow key={index} style={{ textAlign: 'center' }}>
                         <TableDataCell>{titleCase(obj.ability.name)}</TableDataCell>
                         <TableDataCell>{obj.slot}</TableDataCell>
                         <TableDataCell>{obj.is_hidden ? 'Yes' : 'No'}</TableDataCell>

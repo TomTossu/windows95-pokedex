@@ -24,7 +24,8 @@ function Moves({ pokemonMoves }) {
                 const result = await getMovesData(obj.move.url);
 
                 newData = [...newData, result]
-                setMoveData(newData);
+                const sortedData = newData.sort((a, b) => a.name.localeCompare(b.name))
+                setMoveData(sortedData);
             })
         }
         fetchMoveData()
@@ -44,7 +45,7 @@ function Moves({ pokemonMoves }) {
                     </TableHead>
                     <TableBody>
                         {moveData.map((obj) => (
-                            <TableRow style={{ textAlign: 'center' }}>
+                            <TableRow key={obj.id} style={{ textAlign: 'center' }}>
                                 <TableDataCell>{titleCase(obj.name)}</TableDataCell>
                                 <TableDataCell>{obj.power ? obj.power : ' - '}</TableDataCell>
                                 <TableDataCell>{obj.pp}</TableDataCell>

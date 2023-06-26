@@ -3,21 +3,23 @@ import { useEffect, useState } from "react";
 import Pokemon from "./pokemon/Pokemon";
 import { getAllPokemons } from "./pokemon/api";
 import { Hourglass } from "react95";
+import { useGeneration } from "./hooks/hooks";
 
 export default function Home() {
   const [status, setStatus] = useState("pending");
   const [pokemonList, setPokemonList] = useState([]);
   const [disableCursor, setDisableCursor] = useState(false);
+  const [generation, setGeneration] = useGeneration();
 
   useEffect(() => {
     const fetchPokemonList = async () => {
-      const result = await getAllPokemons();
+      const result = await getAllPokemons(generation);
       setPokemonList(result);
       setStatus("resolved");
     };
 
     fetchPokemonList();
-  }, []);
+  }, [generation]);
 
   const handleSelect = (id) => {
     const data = pokemonList.map((i) => {

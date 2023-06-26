@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import styled from 'styled-components'
 import original from 'react95/dist/themes/original';
 import Navbar from './Navbar';
+import { Provider as GenerationProvider } from '../context/context';
 
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
@@ -35,18 +36,23 @@ padding-top: 4rem;
 padding-bottom: 4rem;
 `;
 
-const ThemeComponent = ({ children }) => (
-  <div>
-    <GlobalStyles />
-    <ThemeProvider theme={original}>
-      <CenterBackground>
-        <Navbar />
-        <Container>
-          {children}
-        </Container>
-      </CenterBackground>
-    </ThemeProvider>
-  </div>
-);
+
+function ThemeComponent({ children }) {
+  return (
+    <div>
+      <GlobalStyles />
+      <ThemeProvider theme={original}>
+        <GenerationProvider>
+          <CenterBackground>
+            <Navbar />
+            <Container>
+              {children}
+            </Container>
+          </CenterBackground>
+        </GenerationProvider>
+      </ThemeProvider>
+    </div>
+  )
+};
 
 export default ThemeComponent;

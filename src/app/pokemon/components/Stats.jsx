@@ -12,8 +12,8 @@ function Stats({ pokemonData }) {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {pokemonData.stats.map((obj) => (
-                    <TableRow style={{ textAlign: 'center' }}>
+                {pokemonData.stats.map((obj, index) => (
+                    <TableRow key={index} style={{ textAlign: 'center' }}>
                         <TableDataCell style={{ width: '14rem' }}>{titleCase(obj.stat.name)}</TableDataCell>
                         <TableDataCell>{obj.base_stat}</TableDataCell>
                     </TableRow>
