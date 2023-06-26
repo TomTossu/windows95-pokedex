@@ -2,6 +2,8 @@
 
 A Windows 95 style Pokedex.
 
+Demo: pokedex-95.vercel.app
+
 ![image](https://github.com/TomTossu/windows95-pokedex/assets/45078144/67183df9-0be3-4c72-8085-cae3a280ff4f)
 
 ## Installing
