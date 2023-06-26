@@ -12,23 +12,25 @@ import { handleClose } from '@/utils/utils';
 import { useGeneration } from '../hooks/hooks';
 
 const options = [
-    { value: 0, label: 'first_gen' },
-    { value: 1, label: 'second_gen' },
-    { value: 2, label: 'third_gen' },
-    { value: 3, label: 'fourth_gen' },
+    { value: 'first_gen', label: 'First Gen' },
+    { value: 'second_gen', label: 'Second Gen' },
+    { value: 'third_gen', label: 'Third Gen' },
+    { value: 'fourth_gen', label: 'Fourth Gen' },
 ]
+
+const defaultGen = options[0].value
 
 function Navbar() {
     const [openMenu, setOpenMenu] = useState(false);
     const [showAbout, setShowAbout] = useState(false);
-    const [generation, setGeneration] = useGeneration();
+    const [generation, selectGeneration] = useGeneration();
 
     useEffect(() => {
         document.body.style.overflow = showAbout ? 'hidden' : 'auto';
     }, [showAbout])
 
     const onChange = ((selectedOption) => {
-        setGeneration(selectedOption.label)
+        selectGeneration(selectedOption.value)
     })
 
     return (
@@ -76,13 +78,15 @@ function Navbar() {
                             </ClickAwayListener>
                         )}
                     </div>
-                    <Select
-                        defaultValue={0}
-                        options={options}
-                        menuMaxHeight={160}
-                        width={160}
-                        onChange={onChange} />
-                    <TextInput placeholder='Search...' width={150} />
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                        <span style={{ fontSize: '20px' }}>Choose Generation: </span>
+                        <Select
+                            defaultValue={defaultGen}
+                            options={options}
+                            menuMaxHeight={160}
+                            width={160}
+                            onChange={onChange} />
+                    </div>
                 </Toolbar>
             </AppBar>
 

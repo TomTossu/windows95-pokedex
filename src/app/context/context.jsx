@@ -13,7 +13,7 @@ function GenerationProvider({ children }) {
         generation,
     }
     const actions = {
-        setGeneration: handleSelectGeneration,
+        selectGeneration: handleSelectGeneration,
     }
 
     return (

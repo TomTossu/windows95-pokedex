@@ -9,7 +9,7 @@ export default function Home() {
   const [status, setStatus] = useState("pending");
   const [pokemonList, setPokemonList] = useState([]);
   const [disableCursor, setDisableCursor] = useState(false);
-  const [generation, setGeneration] = useGeneration();
+  const [generation] = useGeneration();
 
   useEffect(() => {
     const fetchPokemonList = async () => {

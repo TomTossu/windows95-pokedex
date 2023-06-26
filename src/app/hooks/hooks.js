@@ -5,8 +5,8 @@ import { GenerationContext } from "../context/context";
 export function useGeneration() {
   const {
     state: { generation },
-    actions: { setGeneration },
+    actions: { selectGeneration },
   } = useContext(GenerationContext);
 
-  return [generation, setGeneration];
+  return [generation, selectGeneration];
 }
